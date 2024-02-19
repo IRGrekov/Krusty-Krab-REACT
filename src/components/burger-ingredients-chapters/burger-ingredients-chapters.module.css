@@ -1,0 +1,12 @@
+.chapters {
+  margin-top: 40px;
+  height: 600px;
+  overflow: auto;
+  /* margin-left: 40px; */
+}
+
+.elements {
+  display: grid;
+  grid-template-columns: repeat(2, 270px);
+  gap: 20px;
+}

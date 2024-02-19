@@ -1,0 +1,9 @@
+.section {
+  margin-right: 50px;
+}
+
+.tabs {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}

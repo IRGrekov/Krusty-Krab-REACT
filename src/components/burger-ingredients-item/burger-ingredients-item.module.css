@@ -1,0 +1,11 @@
+.mainDiv {
+  position: relative;
+  text-align: center;
+  justify-content: center;
+}
+
+.money {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

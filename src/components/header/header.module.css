@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1320px;
+  list-style-type: none;
+}
+
+.leftEl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+}
+
+.profile {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logotip {
+  text-align: center;
+}
