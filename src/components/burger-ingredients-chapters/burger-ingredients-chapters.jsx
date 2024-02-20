@@ -1,6 +1,6 @@
 import { BurgerIngredientsEl } from '../burger-ingredients-item/burger-ingredients-item'
 import PropTypes from 'prop-types'
-import { propTypes } from '../../constant/propTypes'
+import { ingredientPropType } from '../../constant/propTypes'
 import style from './burger-ingredients-chapters.module.css'
 
 export function BurgerIngredientsСhapters({ ingredients }) {
@@ -41,5 +41,5 @@ export function BurgerIngredientsСhapters({ ingredients }) {
 }
 
 BurgerIngredientsСhapters.propTypes = {
-  ingredients: PropTypes.arrayOf(propTypes).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
 }

@@ -5,7 +5,7 @@ import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { propTypes } from '../../constant/propTypes'
+import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
 import style from './burger-constructor.module.css'
 
@@ -14,6 +14,7 @@ export function BurgerConstructor({ ingredients }) {
     <div className={style.listIng}>
       <div className="pl-7">
         <ConstructorElement
+          type="top"
           isLocked={true}
           text="Краторная булка N-200i (верх)"
           price={200}
@@ -36,6 +37,7 @@ export function BurgerConstructor({ ingredients }) {
       </div>
       <div className="pl-7">
         <ConstructorElement
+          type="bottom"
           isLocked={true}
           text="Краторная булка N-200i (низ)"
           price={200}
@@ -58,5 +60,5 @@ export function BurgerConstructor({ ingredients }) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(propTypes).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
 }

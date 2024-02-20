@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BurgerIngredientsСhapters } from '../burger-ingredients-chapters/burger-ingredients-chapters'
-import { propTypes } from '../../constant/propTypes'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
 import style from './burger-ingredients.module.css'
 
@@ -44,5 +44,5 @@ export function BurgerIngredients({ ingredients }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(propTypes).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
 }
