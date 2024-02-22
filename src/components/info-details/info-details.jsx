@@ -1,8 +1,8 @@
-import React from "react";
-import infoDetailsStyles from "./order-details.module.css";
-import { Done } from "../../images";
-import PropTypes from "prop-types";
-import { infoPropTypes } from "../../utils/data";
+import React from 'react'
+import { Done } from '../../assets/done.png'
+import PropTypes from 'prop-types'
+import { infoPropTypes } from '../../utils/data'
+import infoDetailsStyles from './order-details.module.css'
 
 const InfoDetails = ({ info }) => {
   return (
@@ -28,10 +28,10 @@ const InfoDetails = ({ info }) => {
         Дождитесь готовности на орбитальной станции
       </p>
     </>
-  );
-};
+  )
+}
 
 InfoDetails.propTypes = {
   info: PropTypes.shape(infoPropTypes).isRequired,
-};
-export default InfoDetails;
+}
+export default InfoDetails

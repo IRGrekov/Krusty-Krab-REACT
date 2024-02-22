@@ -33,6 +33,5 @@ export function BurgerIngredientsEl({ ingredient }) {
 }
 
 BurgerIngredientsEl.propTypes = {
-    ingredient: ingredientPropType.isRequired
+  ingredient: ingredientPropType.isRequired,
 }
-
