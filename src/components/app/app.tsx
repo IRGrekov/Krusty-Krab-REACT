@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Header } from '../header/header'
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients'
 import { BurgerConstructor } from '../burger-constructor/burger-constructor'
-import { dataList } from '../../constant/dataList'
+import { Base_URL } from '../../constant/url'
+import Loader from '../loader/loader'
+// import { dataList } from '../../constant/dataList'
 import styles from './app.module.css'
 
 function App() {
   const [ingridients, setData] = useState([])
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
     getIngridients()
   }, [])
 
   const getIngridients = async () => {
-    await fetch('https://norma.nomoreparties.space/api/ingredients ')
+    setLoading(true)
+    await fetch(Base_URL)
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.status)
@@ -27,28 +31,25 @@ function App() {
       .catch((err) => {
         console.log(err)
       })
+      .finally(() => setLoading(false))
   }
 
   return (
     <>
       <Header />
-
-      <main className={styles.main}>
-        <BurgerIngredients ingredients={ingridients} />
-        <BurgerConstructor
-          ingredients={ingridients.filter(
-            (ingredient) => ingredient.type !== 'bun'
-          )}
-        />
-      </main>
+      {!isLoading && ingridients.length > 0 ? (
+        <main className={styles.main}>
+          <BurgerIngredients ingredients={ingridients} />
+          <BurgerConstructor
+            ingredients={ingridients.filter(
+              (ingredient) => ingredient.type !== 'bun'
+            )}
+          />
+        </main>
+      ) : (
+        <Loader />
+      )}
     </>
-    //     <>
-    //         <Header/>
-    //         <main className={styles.main}>
-    //             <BurgerIngredients ingredients={dataList}/>
-    //             <BurgerConstructor ingredients={dataList.filter(ingredient => ingredient.type !== 'bun')}/>
-    //         </main>
-    //     </>
   )
 }
 
