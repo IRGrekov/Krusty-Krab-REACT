@@ -15,6 +15,10 @@ export const ingredientPropType = PropTypes.shape({
   __v: PropTypes.number.isRequired
 })
 
+export const infoPropTypes = {
+  number: PropTypes.number.isRequired,
+};
+
 // _id: '60666c42cc7b410027a1a9b1',
 // name: 'Краторная булка N-200i',
 // type: 'bun',

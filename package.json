@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
+    "axios": "^1.6.7",
     "core-js": "^3.36.0",
     "create-vite-react": "^0.6.7",
     "css-loader": "^6.10.0",
