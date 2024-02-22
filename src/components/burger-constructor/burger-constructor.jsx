@@ -1,15 +1,19 @@
-import React from 'react'
+import React, {useModal} from 'react'
 import {
   ConstructorElement,
   DragIcon,
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import Modal from "../modal-forms/modal/modal";
+import {useModal} from "../modal-forms/modal/modal";
 import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
 import style from './burger-constructor.module.css'
 
 export function BurgerConstructor({ ingredients }) {
+  const { isModalOpen, openModal, closeModal } = useModal();
+
   return (
     <div className={style.listIng}>
       <div className="pl-7">

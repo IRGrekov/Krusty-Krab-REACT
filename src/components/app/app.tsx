@@ -4,6 +4,7 @@ import { BurgerIngredients } from '../burger-ingredients/burger-ingredients'
 import { BurgerConstructor } from '../burger-constructor/burger-constructor'
 import { Base_URL } from '../../constant/url'
 import Loader from '../loader/loader'
+import InfoDetails from '../info-details/info-details'
 // import { dataList } from '../../constant/dataList'
 import styles from './app.module.css'
 
@@ -12,10 +13,10 @@ function App() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    getIngridients()
+    getIngredients()
   }, [])
 
-  const getIngridients = async () => {
+  const getIngredients = async () => {
     setLoading(true)
     await fetch(Base_URL)
       .then((response) => {
