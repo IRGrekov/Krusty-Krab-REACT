@@ -3,18 +3,20 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientPropType } from '../../constant/propTypes'
 import style from './burger-ingredients-item.module.css'
 
-export function BurgerIngredientsEl({ ingredient }) {
+export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
   const [count, setCount] = useState(1)
+  const ingredientClick = (ingredient) => {
+    handleIngredientClick(ingredient)
+  }
 
   // const handleCounterClick = () => {
   //     setCount(count + 1);
   // };
 
   return (
-    <div className={style.mainDiv}>
+    <div className={style.mainDiv} onClick={() => ingredientClick(ingredient)}>
       <Counter
         count={count}
         size="default"
@@ -32,6 +34,3 @@ export function BurgerIngredientsEl({ ingredient }) {
   )
 }
 
-BurgerIngredientsEl.propTypes = {
-  ingredient: ingredientPropType.isRequired,
-}

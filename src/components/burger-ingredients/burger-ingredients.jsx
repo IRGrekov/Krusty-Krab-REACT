@@ -5,7 +5,7 @@ import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
 import style from './burger-ingredients.module.css'
 
-export function BurgerIngredients({ ingredients }) {
+export function BurgerIngredients({ ingredients, handleIngredientClick }) {
   const [chapter, setСurrent] = useState('loaf')
 
   const setNow = (tab) => {
@@ -38,11 +38,14 @@ export function BurgerIngredients({ ingredients }) {
           Начинки
         </Tab>
       </div>
-      <BurgerIngredientsСhapters ingredients={ingredients} />
+      <BurgerIngredientsСhapters
+        handleIngredientClick={handleIngredientClick}
+        ingredients={ingredients}
+      />
     </div>
   )
 }
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-}
+// BurgerIngredients.propTypes = {
+//   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+// }
