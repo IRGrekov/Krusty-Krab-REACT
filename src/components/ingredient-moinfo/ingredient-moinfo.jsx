@@ -1,3 +1,4 @@
+import { ingredientPropType } from '../../constant/propTypes'
 import style from './ingredient-moinfo.module.css'
 
 export function IngredientMoinfo({ ingredient }) {
@@ -41,4 +42,8 @@ export function IngredientMoinfo({ ingredient }) {
       </div>
     </div>
   )
+}
+
+IngredientMoinfo.propTypes = {
+  ingredient: ingredientPropType.isRequired
 }

@@ -3,6 +3,8 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from "prop-types";
+import { ingredientPropType } from '../../constant/propTypes'
 import style from './burger-ingredients-item.module.css'
 
 export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
@@ -32,4 +34,9 @@ export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
       <div className="pt-1 text text_type_main-small">{ingredient.name}</div>
     </div>
   )
+}
+
+BurgerIngredientsEl.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+  handleIngredientClick: PropTypes.func.isRequired
 }
