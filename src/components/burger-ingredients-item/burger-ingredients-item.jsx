@@ -33,4 +33,3 @@ export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
     </div>
   )
 }
-

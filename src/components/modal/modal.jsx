@@ -38,4 +38,3 @@ export function Modal({ header, children, onClose }) {
     modalRoot
   )
 }
-
