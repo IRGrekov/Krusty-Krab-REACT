@@ -1,26 +1,19 @@
 import { useState, useCallback } from "react";
 
-export const useModal = (data) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
-  // `useCallback` нужен для того, чтобы зафиксировать ссылку на функцию.
-  
-  const openModal = useCallback((data) => {
-    if (data) {
-      setIsModalOpen(true);
-      setModalData(data);
-    }
-  }, []);
+export const useModal = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-    setModalData({});
-  }, []);
+    const openModal = useCallback(() => {
+        setIsModalOpen(true);
+    }, []);
 
-  return {
-    isModalOpen,
-    modalData,
-    openModal,
-    closeModal,
-  };
+    const closeModal = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
+
+    return {
+        isModalOpen,
+        openModal,
+        closeModal,
+    };
 };
