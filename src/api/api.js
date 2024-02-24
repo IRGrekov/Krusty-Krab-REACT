@@ -1,24 +1,19 @@
-import axios from 'axios'
-
 class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl
   }
 
   getIngredients() {
-    return axios
-      .get(`${this.baseUrl}/ingredients`, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        return response.data
-      })
-      .catch((error) => {
-        return Promise.reject(`Error: ${error.message}`)
-      })
+    return fetch(`${this.baseUrl}/ingredients`, {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }).then((response) => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`)
+      }
+
+      return response.json()
+    })
   }
 }
 

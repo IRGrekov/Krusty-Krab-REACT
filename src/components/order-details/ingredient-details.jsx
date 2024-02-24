@@ -1,7 +1,7 @@
 import style from './order-details.module.css'
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export function OrderIdentifier() {
+export function OrderDetails() {
   return (
     <div className={style.orderDetails}>
       <div className="text_type_digits-large">034536</div>

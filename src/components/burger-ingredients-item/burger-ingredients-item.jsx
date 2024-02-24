@@ -3,7 +3,7 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 import { ingredientPropType } from '../../constant/propTypes'
 import style from './burger-ingredients-item.module.css'
 
@@ -38,5 +38,5 @@ export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
 
 BurgerIngredientsEl.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-  handleIngredientClick: PropTypes.func.isRequired
+  handleIngredientClick: PropTypes.func.isRequired,
 }

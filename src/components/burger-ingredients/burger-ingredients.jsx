@@ -38,15 +38,17 @@ export function BurgerIngredients({ ingredients, handleIngredientClick }) {
           Начинки
         </Tab>
       </div>
-      <BurgerIngredientsСhapters
-        handleIngredientClick={handleIngredientClick}
-        ingredients={ingredients}
-      />
+      {ingredients !== undefined && (
+        <BurgerIngredientsСhapters
+          handleIngredientClick={handleIngredientClick}
+          ingredients={ingredients}
+        />
+      )}
     </div>
   )
 }
 
 BurgerIngredients.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-  handleIngredientClick: PropTypes.func.isRequired
+  handleIngredientClick: PropTypes.func.isRequired,
 }

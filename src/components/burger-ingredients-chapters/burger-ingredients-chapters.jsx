@@ -57,5 +57,5 @@ export function BurgerIngredientsСhapters({
 
 BurgerIngredientsСhapters.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-  handleIngredientClick: PropTypes.func.isRequired
+  handleIngredientClick: PropTypes.func.isRequired,
 }
