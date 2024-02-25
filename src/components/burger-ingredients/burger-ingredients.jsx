@@ -38,12 +38,10 @@ export function BurgerIngredients({ ingredients, handleIngredientClick }) {
           Начинки
         </Tab>
       </div>
-      {ingredients !== undefined && (
         <BurgerIngredientsСhapters
           handleIngredientClick={handleIngredientClick}
           ingredients={ingredients}
         />
-      )}
     </div>
   )
 }

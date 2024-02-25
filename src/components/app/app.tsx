@@ -40,12 +40,10 @@ function App() {
     <>
       <Header />
       <main className={styles.main}>
-        {data !== undefined && (
           <BurgerIngredients
             ingredients={data}
             handleIngredientClick={handleIngredientClick}
           />
-        )}
         <BurgerConstructor
           handleOrderClick={handleOrderClick}
           ingredients={data.filter((ingredient) => ingredient.type !== 'bun')}
