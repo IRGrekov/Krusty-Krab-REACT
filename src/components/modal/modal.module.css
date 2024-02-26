@@ -1,0 +1,16 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 720px;
+  height: 590px;
+  background-color: #1c1c21;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.topPart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

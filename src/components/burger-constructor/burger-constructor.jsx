@@ -9,7 +9,7 @@ import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
 import style from './burger-constructor.module.css'
 
-export function BurgerConstructor({ ingredients }) {
+export function BurgerConstructor({ ingredients, handleOrderClick }) {
   return (
     <div className={style.listIng}>
       <div className="pl-7">
@@ -50,7 +50,12 @@ export function BurgerConstructor({ ingredients }) {
           <CurrencyIcon type="primary" />
         </div>
         <div className="pl-10">
-          <Button htmlType="button" type="primary" size="medium">
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={handleOrderClick}
+          >
             Оформить заказ
           </Button>
         </div>
@@ -61,4 +66,5 @@ export function BurgerConstructor({ ingredients }) {
 
 BurgerConstructor.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+  handleOrderClick: PropTypes.func.isRequired,
 }

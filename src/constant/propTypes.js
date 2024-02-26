@@ -12,7 +12,7 @@ export const ingredientPropType = PropTypes.shape({
   image: PropTypes.string.isRequired,
   image_mobile: PropTypes.string.isRequired,
   image_large: PropTypes.string.isRequired,
-  __v: PropTypes.number.isRequired
+  __v: PropTypes.number.isRequired,
 })
 
 // _id: '60666c42cc7b410027a1a9b1',
