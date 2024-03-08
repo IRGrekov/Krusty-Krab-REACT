@@ -1,9 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
+import React from 'react'
+import style from './modal.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from '../modal-overlay/modal-overlay'
+import { ingredientPropType } from '../../constant/propTypes'
 import PropTypes from 'prop-types'
-import style from './modal.module.css'
 
 const modalRoot = document.getElementById('react-modals')
 
@@ -28,7 +29,7 @@ export function Modal({ header, children, onClose }) {
       <div className={`${style.modal} p-10`}>
         <div className={style.topPart}>
           <div className="text text_type_main-large">{header}</div>
-          <div>
+          <div className={style.closeButtonContainer}>
             <CloseIcon type="primary" onClick={onClose} />
           </div>
         </div>
