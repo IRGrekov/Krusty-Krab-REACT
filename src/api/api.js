@@ -9,13 +9,7 @@ class Api {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`)
-      }
-
-      return response.json()
-    })
+    }).then(this._checkResponse)
   }
 
   getOrderDetails(ingredients) {
@@ -25,13 +19,15 @@ class Api {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-    }).then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`)
-      }
+    }).then(this._checkResponse)
+  }
 
-      return response.json()
-    })
+  _checkResponse(res) {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`)
+    }
+
+    return res.json()
   }
 }
 
