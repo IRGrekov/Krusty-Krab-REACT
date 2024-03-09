@@ -80,9 +80,7 @@ export function BurgerConstructorItem({ element, id, index }) {
     <div
       style={{ ...style, opacity }}
       className={style.saucesAndMainItem}
-      key={element.id}
       ref={ref}
-      data-handler-id={handlerId}
     >
       <DragIcon type="primary" />
       <div className={`${style.constructorElementContainer} pr-1 pl-1`}>

@@ -34,5 +34,3 @@ export function BurgerIngredients() {
     </div>
   )
 }
-
-BurgerIngredients.propTypes = {}
