@@ -1,70 +1,113 @@
 import React from 'react'
-import {
-  ConstructorElement,
-  DragIcon,
-  Button,
-  CurrencyIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientPropType } from '../../constant/propTypes'
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { useDrop } from 'react-dnd'
+import { nanoid } from 'nanoid'
+import {
+  addIngredient,
+  setBun,
+} from '../../services/actions/burger-constructor'
+import { BurgerConstructorItem } from '../burger-constructor-item/burger-constructor-item'
+import { ConfirmationOrder } from '../сonfirmation-order/сonfirmation-order'
+import logo from '../../images/krusty-krab-png.png'
 import style from './burger-constructor.module.css'
 
-export function BurgerConstructor({ ingredients, handleOrderClick }) {
+export function BurgerConstructor({ handleOrderClick }) {
+  const dispatch = useDispatch()
+
+  const buns = useSelector((state) => state.burgerConstructor.bunsList)
+  const main = useSelector((state) => state.burgerConstructor.mainList)
+
+  const [, drop] = useDrop(() => ({
+    accept: 'ingredient',
+    drop: (item) => addElement(item.ingredient),
+  }))
+
+  const addElement = (element) => {
+    element = { ...element, id: nanoid() }
+    if (element.type === 'bun') {
+      dispatch(setBun(element))
+    }
+    if (element.type === 'sauce' || element.type === 'main') {
+      dispatch(addIngredient(element))
+    }
+  }
+
   return (
-    <div className={style.listIng}>
-      <div className="pl-7">
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-        />
-      </div>
-      <div className={style.centralIng}>
-        {ingredients.map((ingredient) => (
-          <div className={style.centralIngEl} key={ingredient._id}>
-            <DragIcon type="primary" />
-            <div className={`${style.constructorElementContainer} pr-1 pl-1`}>
-              <ConstructorElement
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
+    <div className={style.listIng} ref={drop}>
+      {buns.length > 0 ? (
+        <div className="pl-7">
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={`${buns[0].name} (верх)`}
+            price={buns[0].price}
+            thumbnail={buns[0].image}
+          />
+        </div>
+      ) : (
+        <div className="pl-7">
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text="Перетащите сюда булку"
+            thumbnail={logo}
+            price="-"
+          />
+        </div>
+      )}
+
+      <div className={style.saucesAndMain}>
+        {main.length > 0 ? (
+          main.map((element, index) => {
+            return (
+              <BurgerConstructorItem
+                element={element}
+                index={index}
+                id={element.id}
+                key={element.id}
               />
-            </div>
+            )
+          })
+        ) : (
+          <div className="pl-7">
+            <ConstructorElement
+              text="Перетащите сюда соус или начинку"
+              thumbnail={logo}
+              price="-"
+            />
           </div>
-        ))}
+        )}
       </div>
-      <div className="pl-7">
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-        />
-      </div>
-      <div className={`${style.order} pt-10`}>
-        <div className="text text_type_digits-medium">610</div>
-        <div className="pl-1">
-          <CurrencyIcon type="primary" />
+      {buns.length > 0 ? (
+        <div className="pl-7">
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={`${buns[0].name} (низ)`}
+            price={buns[0].price}
+            thumbnail={buns[0].image}
+          />
         </div>
-        <div className="pl-10">
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={handleOrderClick}
-          >
-            Оформить заказ
-          </Button>
+      ) : (
+        <div className="pl-7">
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text="Перетащите сюда булку"
+            thumbnail={logo}
+            price="-"
+          />
         </div>
-      </div>
+      )}
+      {buns.length > 0 ? (
+        <ConfirmationOrder handleOrderClick={handleOrderClick} />
+      ) : null}
     </div>
   )
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
   handleOrderClick: PropTypes.func.isRequired,
 }

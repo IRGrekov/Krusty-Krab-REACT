@@ -1,29 +1,47 @@
-import React, { useState } from 'react'
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
-import { ingredientPropType } from '../../constant/propTypes'
 import style from './burger-ingredients-item.module.css'
+import { ingredientPropType } from '../../constant/propTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import { addIngredientDetails } from '../../services/actions/ingredient-details'
+import { useDrag } from 'react-dnd'
 
-export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
-  const [count, setCount] = useState(1)
-  const ingredientClick = (ingredient) => {
-    handleIngredientClick(ingredient)
+export function BurgerIngredientsEl({ ingredient }) {
+  const buns = useSelector((state) => state.burgerConstructor.bunsList)
+  const main = useSelector((state) => state.burgerConstructor.mainList)
+
+  const counter =
+    buns.filter((item) => item._id === ingredient._id).length * 2 ||
+    main.filter((item) => item._id === ingredient._id).length
+
+  const dispatch = useDispatch()
+
+  const handleIngredientClick = (ingredient) => {
+    dispatch(addIngredientDetails(ingredient))
   }
+
+  const [, drag] = useDrag(() => ({
+    type: 'ingredient',
+    item: {
+      ingredient,
+      id: ingredient._id,
+      type: ingredient.type,
+    },
+  }))
 
   // const handleCounterClick = () => {
   //     setCount(count + 1);
   // };
 
   return (
-    <div className={style.mainDiv} onClick={() => ingredientClick(ingredient)}>
-      <Counter
-        count={count}
-        size="default"
-        // onClick={handleCounterClick}
-      />
+    <div
+      className={style.mainDiv}
+      onClick={() => handleIngredientClick(ingredient)}
+      ref={drag}
+    >
+      <Counter count={counter} size="default" />
       <img src={ingredient.image} alt={ingredient.name} />
       <div className={style.money}>
         <div className="text text_type_digits-default">{ingredient.price}</div>
@@ -38,5 +56,4 @@ export function BurgerIngredientsEl({ ingredient, handleIngredientClick }) {
 
 BurgerIngredientsEl.propTypes = {
   ingredient: ingredientPropType.isRequired,
-  handleIngredientClick: PropTypes.func.isRequired,
 }

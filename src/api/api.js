@@ -4,16 +4,34 @@ class Api {
   }
 
   getIngredients() {
-    return fetch(`${this.baseUrl}/ingredients`, {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }).then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`)
-      }
-
-      return response.json()
+    return this._request(`${this.baseUrl}/ingredients`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     })
+  }
+
+  getOrderDetails(ingredients) {
+    return this._request(`${this.baseUrl}/orders`, {
+      method: 'POST',
+      body: JSON.stringify({ ingredients: ingredients }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse)
+  }
+
+  _checkResponse(res) {
+    if (!res.ok) {
+      return Promise.reject(new Error(`Ошибка: ${res.status}`))
+    }
+
+    return res.json()
   }
 }
 
