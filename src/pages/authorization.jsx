@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react';
 import {
   EmailInput,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link, useNavigate } from 'react-router-dom'
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { userAuthorization } from '../services/actions/authorization'
 import style from './pages.module.css'
@@ -12,6 +12,7 @@ import style from './pages.module.css'
 export function Authorization() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation();
   const authorization = useSelector(
     (state) => state.userAuthorization.authorization
   )
@@ -26,9 +27,13 @@ export function Authorization() {
     dispatch(userAuthorization(value.email, value.password))
   }
 
-  if (authorization) {
-    navigate('/profile')
-  }
+  const fromPage = location.state?.from?.pathname || '/';
+
+  useEffect(() => {
+      if (authorization) {
+          navigate(fromPage)
+      }
+  }, [authorization])
 
   return (
     <form className={style.default} onSubmit={checkAuthorization}>
