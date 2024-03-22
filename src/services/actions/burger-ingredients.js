@@ -10,9 +10,11 @@ export const getBurgerIngredientsSuccess = (data) => ({
 })
 
 export function getBurgerIngredients() {
-  return (dispatch) =>
+  return (dispatch) => {
+    dispatch({ type: GET_BURGER_INGREDIENTS_REQUEST })
     api
       .getIngredients()
       .then(({ data }) => dispatch(getBurgerIngredientsSuccess(data)))
-      .catch(console.error)
+      .catch(() => dispatch({ type: GET_BURGER_INGREDIENTS_FAILURE }))
+  }
 }

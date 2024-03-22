@@ -1,37 +1,127 @@
+import { getCookie } from '../utils/cookie'
+
 class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl
   }
 
-  getIngredients() {
-    return this._request(`${this.baseUrl}/ingredients`, {
+  configureUrl(url) {
+    return `${this.baseUrl}/${url}`
+  }
+
+  makeRequest(url, method, body = null, additionalHeaders = {}) {
+    return fetch(this.configureUrl(url), {
+      method: method,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        ...additionalHeaders,
       },
+      body: body,
+    }).then((response) => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`)
+      }
+
+      return response.json()
     })
+  }
+
+  getIngredients() {
+    return this.makeRequest('ingredients', 'GET')
   }
 
   getOrderDetails(ingredients) {
-    return this._request(`${this.baseUrl}/orders`, {
-      method: 'POST',
-      body: JSON.stringify({ ingredients: ingredients }),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
+    return this.makeRequest(
+      'orders',
+      'POST',
+      JSON.stringify({ ingredients: ingredients })
+    )
+  }
+
+  registration(name, email, password) {
+    return this.makeRequest(
+      'auth/register',
+      'POST',
+      JSON.stringify({
+        name,
+        email,
+        password,
+      })
+    )
+  }
+
+  authorization(email, password) {
+    return this.makeRequest(
+      'auth/login',
+      'POST',
+      JSON.stringify({
+        email,
+        password,
+      })
+    )
+  }
+
+  logout() {
+    return this.makeRequest(
+      'auth/logout',
+      'POST',
+      JSON.stringify({
+        token: getCookie('refresh'),
+      })
+    )
+  }
+
+  forgot(email) {
+    return this.makeRequest(
+      'password-reset',
+      'POST',
+      JSON.stringify({
+        email,
+      })
+    )
+  }
+
+  reset(password, token) {
+    return this.makeRequest(
+      'password-reset/reset',
+      'POST',
+      JSON.stringify({
+        password,
+        token,
+      })
+    )
+  }
+
+  refresh() {
+    return this.makeRequest(
+      'auth/token',
+      'POST',
+      JSON.stringify({
+        token: getCookie('refresh'),
+      })
+    )
+  }
+
+  getProfile() {
+    return this.makeRequest('auth/user', 'GET', null, {
+      authorization: 'Bearer ' + getCookie('access'),
     })
   }
 
-  _request(url, options) {
-    return fetch(url, options).then(this._checkResponse)
-  }
-
-  _checkResponse(res) {
-    if (!res.ok) {
-      return Promise.reject(new Error(`Ошибка: ${res.status}`))
-    }
-
-    return res.json()
+  updateProfile(name, email, password) {
+    return this.makeRequest(
+      'auth/user',
+      'PATCH',
+      JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+      {
+        authorization: 'Bearer ' + getCookie('access'),
+      }
+    )
   }
 }
 

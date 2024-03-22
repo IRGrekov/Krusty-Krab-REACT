@@ -11,12 +11,14 @@ export const getOrderSuccess = (number) => ({
 })
 
 export function getOrderDetails(ingredients) {
-  return (dispatch) =>
+  return (dispatch) => {
+    dispatch({ type: GET_ORDER_DETAILS_REQUEST })
     api
       .getOrderDetails(ingredients)
       .then(({ order: { number } }) => dispatch(getOrderSuccess(number)))
       .then(() => {
         dispatch(clearConstructor())
       })
-      .catch(console.error)
+      .catch(() => dispatch({ type: GET_ORDER_DETAILS_FAILURE }))
+  }
 }

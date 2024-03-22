@@ -5,42 +5,45 @@ import {
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { NavLink, useMatch } from 'react-router-dom'
 import style from './header.module.css'
 
 export function Header() {
+  const isConstructor = useMatch('/')
+  const isFeed = useMatch('/feed')
+  const isProfile = useMatch('/profile')
+
   return (
     <header className={style.header}>
       <nav className={style.nav}>
         <div className={style.list}>
           <div className={style.leftEl}>
             <div className="pt-4 pb-4 pl-5 pr-5">
-              <div className={style.link}>
-                {/* <BurgerIcon type="secondary" style={{ marginTop: "5px" }} />  */}
-                <div className="pl-3 text text_type_main-default">
-                  {<BurgerIcon type="primary" />} Конструктор
-                </div>
-              </div>
+              <NavLink to="/" className={style.link}>
+                  {/* <BurgerIcon type="secondary" style={{ marginTop: "5px" }} />  */}
+                {<BurgerIcon type="primary" />} Конструктор
+              </NavLink>
             </div>
             <div className="pt-4 pb-4 pl-5 pr-5">
-              <div className={style.link}>
+              <NavLink to="/feed" className={style.link}>
                 {/* <ListIcon type="secondary" style={{ marginTop: "5px" }} />  */}
                 <div className="pl-3 text text_type_main-default text_color_inactive">
                   {<ListIcon type="secondary" />} Лента заказов
                 </div>
-              </div>
+              </NavLink>
             </div>
           </div>
           <div className={style.logotip}>
-            <Logo />
+            <NavLink to="/">
+              <Logo />
+            </NavLink>
           </div>
           <div className={style.profile}>
-            <div className={style.link}>
+            <NavLink to="/profile" className={style.link}>
               {/* <ProfileIcon type="secondary" style={{ marginTop: "5px" }} /> */}
-              <div className="pl-3 text text_type_main-default text_color_inactive">
-                {' '}
-                <ProfileIcon type="secondary" /> Личный кабинет
-              </div>
-            </div>
+              <ProfileIcon type={isProfile ? 'primary' : 'secondary'} /> Личный
+              кабинет
+            </NavLink>
           </div>
         </div>
       </nav>

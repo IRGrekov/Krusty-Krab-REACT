@@ -5,30 +5,32 @@ import {
 import style from './burger-ingredients-item.module.css'
 import { ingredientPropType } from '../../constant/propTypes'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom';
 import { addIngredientDetails } from '../../services/actions/ingredient-details'
 import { useDrag } from 'react-dnd'
 
 export function BurgerIngredientsEl({ ingredient }) {
-  const buns = useSelector((state) => state.burgerConstructor.bunsList)
-  const main = useSelector((state) => state.burgerConstructor.mainList)
+  const location = useLocation();
 
-  const counter =
-    buns.filter((item) => item._id === ingredient._id).length * 2 ||
-    main.filter((item) => item._id === ingredient._id).length
+  const buns = useSelector(state => state.burgerConstructor.bunsList)
+  const main = useSelector(state => state.burgerConstructor.mainList)
+
+  const counter = buns.filter((item) => item._id === ingredient._id).length * 2
+      || main.filter((item) => item._id === ingredient._id).length
 
   const dispatch = useDispatch()
 
   const handleIngredientClick = (ingredient) => {
-    dispatch(addIngredientDetails(ingredient))
+      dispatch(addIngredientDetails(ingredient))
   }
 
   const [, drag] = useDrag(() => ({
-    type: 'ingredient',
-    item: {
-      ingredient,
-      id: ingredient._id,
-      type: ingredient.type,
-    },
+      type: 'ingredient',
+      item: {
+          ingredient,
+          id: ingredient._id,
+          type: ingredient.type
+      }
   }))
 
   // const handleCounterClick = () => {
@@ -41,6 +43,11 @@ export function BurgerIngredientsEl({ ingredient }) {
       onClick={() => handleIngredientClick(ingredient)}
       ref={drag}
     >
+                  <Link
+                to={`/ingredients/${ingredient._id}`}
+                state={{backgroundLocation: location}}
+                className={`${style.link} text text_type_main-default`}
+            >
       <Counter count={counter} size="default" />
       <img src={ingredient.image} alt={ingredient.name} />
       <div className={style.money}>
@@ -50,6 +57,7 @@ export function BurgerIngredientsEl({ ingredient }) {
         </div>
       </div>
       <div className="pt-1 text text_type_main-small">{ingredient.name}</div>
+      </Link>
     </div>
   )
 }
