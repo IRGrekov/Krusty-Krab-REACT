@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux'
 import { BurgerIngredientsEl } from '../burger-ingredients-item/burger-ingredients-item'
 import PropTypes from 'prop-types'
+import { TBurgerIngredientsSet, TIngredientType } from '../../constant/types'
+import { FC } from 'react'
 
-export function BurgerIngredientsSet({ type }) {
+export const BurgerIngredientsSet: FC<TBurgerIngredientsSet> = ({ type }) => {
   const ingredients = useSelector(
-    (state) => state.burgerIngredients.burgerIngredients
+    (state: any) => state.burgerIngredients.burgerIngredients
   )
   return (
     <>
       {ingredients
-        .filter((ingredient) => ingredient.type === type)
-        .map((ingredient) => (
+        .filter((ingredient: TIngredientType) => ingredient.type === type)
+        .map((ingredient: TIngredientType) => (
           <BurgerIngredientsEl key={ingredient._id} ingredient={ingredient} />
         ))}
     </>

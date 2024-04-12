@@ -5,7 +5,7 @@ import style from './pages.module.css'
 
 export function Feed() {
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   if (!authorization) {

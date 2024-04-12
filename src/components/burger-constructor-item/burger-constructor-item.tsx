@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { FC, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   deleteIngredient,
@@ -10,29 +10,37 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { PropTypes } from 'prop-types'
-import { ingredientPropType } from '../../constant/propTypes'
+import {
+  TBurgerConstructorElement,
+  TIngredientType,
+  TItem,
+} from '../../constant/types'
 
-export function BurgerConstructorItem({ element, id, index }) {
+export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({
+  element,
+  id,
+  index,
+}) => {
   const ref = useRef(null)
   const dispatch = useDispatch()
 
-  const moveCard = (start, end) => {
+  const moveCard = (start: number, end: number) => {
     dispatch(moveIngredient(start, end))
   }
 
-  const deleteElement = (element) => {
+  const deleteElement = (element: TIngredientType) => {
     dispatch(deleteIngredient(element))
   }
 
-  const [{ handlerId }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: 'card',
     collect(monitor) {
       return {
-        handlerId: monitor.getHandlerId,
+        handlerId: monitor.getHandlerId(),
       }
     },
-    hover(item, monitor) {
+    // @ts-ignore
+    hover(item: { index: number }, monitor) {
       if (!ref.current) {
         return
       }
@@ -44,11 +52,12 @@ export function BurgerConstructorItem({ element, id, index }) {
         return
       }
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect()
+      const rect: HTMLElement = ref.current
+      const hoverBoundingRect = rect?.getBoundingClientRect()
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
       const clientOffset = monitor.getClientOffset()
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
@@ -93,10 +102,4 @@ export function BurgerConstructorItem({ element, id, index }) {
       </div>
     </div>
   )
-}
-
-BurgerConstructorItem.propTypes = {
-  element: ingredientPropType.isRequired,
-  id: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
 }

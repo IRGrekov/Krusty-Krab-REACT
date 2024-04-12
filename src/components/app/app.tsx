@@ -26,12 +26,10 @@ export default function App() {
   const state = location?.state?.backgroundLocation
 
   React.useEffect(() => {
+    // @ts-ignore
     dispatch(getBurgerIngredients())
   }, [dispatch])
 
-  const openIngredientDetailsModal = useSelector(
-    (state) => !!state.ingredientDetails.ingredientDetails
-  )
   const closeIngredientsModal = useCallback(() => {
     dispatch(deleteIngredientDetails())
     navigate('/')
@@ -71,14 +69,12 @@ export default function App() {
           <Route
             path="/ingredients/:id"
             element={
-              openIngredientDetailsModal && (
-                <Modal
-                  onClose={closeIngredientsModal}
-                  header="Детали ингредиента"
-                >
-                  <IngredientDetails />
-                </Modal>
-              )
+              <Modal
+                onClose={closeIngredientsModal}
+                header="Детали ингредиента"
+              >
+                <IngredientDetails />
+              </Modal>
             }
           ></Route>
         </Routes>

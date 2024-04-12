@@ -20,7 +20,7 @@ export function Header() {
           <div className={style.leftEl}>
             <div className="pt-4 pb-4 pl-5 pr-5">
               <NavLink to="/" className={style.link}>
-                  {/* <BurgerIcon type="secondary" style={{ marginTop: "5px" }} />  */}
+                {/* <BurgerIcon type="secondary" style={{ marginTop: "5px" }} />  */}
                 {<BurgerIcon type="primary" />} Конструктор
               </NavLink>
             </div>
