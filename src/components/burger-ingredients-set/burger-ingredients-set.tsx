@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { BurgerIngredientsEl } from '../burger-ingredients-item/burger-ingredients-item'
-import PropTypes from 'prop-types'
 import { TBurgerIngredientsSet, TIngredientType } from '../../constant/types'
 import { FC } from 'react'
 
@@ -17,8 +16,4 @@ export const BurgerIngredientsSet: FC<TBurgerIngredientsSet> = ({ type }) => {
         ))}
     </>
   )
-}
-
-BurgerIngredientsSet.propTypes = {
-  type: PropTypes.string.isRequired,
 }

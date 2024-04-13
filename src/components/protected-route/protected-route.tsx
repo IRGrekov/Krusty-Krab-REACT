@@ -1,6 +1,5 @@
 import { Navigate, RouteProps, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
 import { FC } from 'react'
 
 export const ProtectedRoute: FC<RouteProps | any> = ({
@@ -29,6 +28,4 @@ export const ProtectedRoute: FC<RouteProps | any> = ({
   return children
 }
 
-ProtectedRoute.propTypes = {
-  children: PropTypes.element.isRequired,
-}
+

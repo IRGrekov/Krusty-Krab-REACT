@@ -12,8 +12,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   TBurgerConstructorElement,
-  TIngredientType,
-  TItem,
+  TIngredientType
 } from '../../constant/types'
 
 export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({

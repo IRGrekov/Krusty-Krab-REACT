@@ -81,5 +81,3 @@ export function BurgerIngredientsСhapters() {
     </div>
   )
 }
-
-BurgerIngredientsСhapters.propTypes = {}

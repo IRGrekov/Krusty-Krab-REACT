@@ -3,7 +3,6 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import style from './burger-ingredients-item.module.css'
-import { ingredientPropType } from '../../constant/propTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { addIngredientDetails } from '../../services/actions/ingredient-details'
@@ -70,6 +69,4 @@ export const BurgerIngredientsEl: FC<TBurgerIngredientsItem> = ({
   )
 }
 
-BurgerIngredientsEl.propTypes = {
-  ingredient: ingredientPropType.isRequired,
-}
+

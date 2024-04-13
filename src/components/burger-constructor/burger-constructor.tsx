@@ -1,6 +1,5 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { nanoid } from 'nanoid'
@@ -144,6 +143,4 @@ export function BurgerConstructor() {
   )
 }
 
-// BurgerConstructor.propTypes = {
-//   handleOrderClick: PropTypes.func.isRequired,
-// }
+

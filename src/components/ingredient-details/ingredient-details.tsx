@@ -59,4 +59,3 @@ export function IngredientDetails() {
   )
 }
 
-IngredientDetails.propTypes = {}

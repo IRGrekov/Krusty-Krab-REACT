@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import style from './modal.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from '../modal-overlay/modal-overlay'
-import { ingredientPropType } from '../../constant/propTypes'
 import { TModal } from '../../constant/types'
 
 const modalRoot = document.getElementById('react-modals') as HTMLDivElement
