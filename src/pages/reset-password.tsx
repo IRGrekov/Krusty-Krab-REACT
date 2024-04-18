@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEventHandler } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   PasswordInput,
@@ -12,9 +12,9 @@ import style from './pages.module.css'
 export function ResetPassword() {
   const dispatch = useDispatch()
 
-  const forgot = useSelector((state) => state.forgotPassword.success)
+  const forgot = useSelector((state: any) => state.forgotPassword.success)
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   const [value, setValue] = React.useState({
@@ -22,14 +22,14 @@ export function ResetPassword() {
     token: '',
   })
 
-  const inputRef = React.useRef(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+    setTimeout(() => inputRef.current?.focus(), 0)
   }
 
-  const reset = (evt) => {
+  const reset: FormEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault()
+    // @ts-ignore
     dispatch(resetPassword(value.password, value.token))
   }
 

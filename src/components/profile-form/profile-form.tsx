@@ -7,10 +7,11 @@ import style from './profile-form.module.css'
 export function ProfileForm() {
   const dispatch = useDispatch()
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   const handleLogout = React.useCallback(() => {
+    //@ts-ignore
     dispatch(userLogout())
   }, [dispatch])
 

@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, { FormEventHandler, useEffect } from 'react'
 import {
   EmailInput,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userAuthorization } from '../services/actions/authorization'
 import style from './pages.module.css'
@@ -12,9 +12,9 @@ import style from './pages.module.css'
 export function Authorization() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation();
+  const location = useLocation()
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   const [value, setValue] = React.useState({
@@ -22,17 +22,18 @@ export function Authorization() {
     password: '',
   })
 
-  const checkAuthorization = (evt) => {
+  const checkAuthorization: FormEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault()
+    // @ts-ignore
     dispatch(userAuthorization(value.email, value.password))
   }
 
-  const fromPage = location.state?.from?.pathname || '/';
+  const fromPage = location.state?.from?.pathname || '/'
 
   useEffect(() => {
-      if (authorization) {
-          navigate(fromPage)
-      }
+    if (authorization) {
+      navigate(fromPage)
+    }
   }, [authorization])
 
   return (

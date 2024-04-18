@@ -4,15 +4,22 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
-import { useMemo } from 'react'
+import { FC, useMemo } from 'react'
+import { TOrderRegistration } from '../../constant/types'
 
-export function ConfirmationOrder({ handleOrderClick }) {
-  const buns = useSelector((state) => state.burgerConstructor.bunsList)
-  const main = useSelector((state) => state.burgerConstructor.mainList)
+export const ConfirmationOrder: FC<TOrderRegistration> = ({
+  handleOrderClick,
+}) => {
+  const buns = useSelector((state: any) => state.burgerConstructor.bunsList)
+  const main = useSelector((state: any) => state.burgerConstructor.mainList)
 
-  const allPrice =
-    buns.reduce((el, { price }) => el + price, 0) * 2 +
-    main.reduce((el, { price }) => el + price, 0)
+  const allPrice = useMemo(
+    () =>
+      // @ts-ignore
+      buns.reduce((el: number, { price }) => el + price, 0) * 2 +
+      main.reduce((el: number, { price }) => el + price, 0),
+    [buns, main]
+  )
 
   return (
     <div className={`${style.order} pt-10`}>

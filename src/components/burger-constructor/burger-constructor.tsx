@@ -1,6 +1,5 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { nanoid } from 'nanoid'
@@ -16,19 +15,24 @@ import { ConfirmationOrder } from '../сonfirmation-order/сonfirmation-order'
 import { OrderDetails } from '../order-details/order-details'
 import logo from '../../images/krusty-krab-png.png'
 import style from './burger-constructor.module.css'
+import {
+  TBurgerConstructorElement,
+  TIngredientType,
+  TItem,
+} from '../../constant/types'
 
 export function BurgerConstructor() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const buns = useSelector((state) => state.burgerConstructor.bunsList)
-  const main = useSelector((state) => state.burgerConstructor.mainList)
+  const buns = useSelector((state: any) => state.burgerConstructor.bunsList)
+  const main = useSelector((state: any) => state.burgerConstructor.mainList)
   const ingredients = useSelector(
-    (state) => state.burgerIngredients.burgerIngredients
+    (state: any) => state.burgerIngredients.burgerIngredients
   )
-  const idIngredientsList = ingredients.map((el) => el._id)
+  const idIngredientsList = ingredients.map((el: TIngredientType) => el._id)
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   const [openModal, setOpenModal] = React.useState(false)
@@ -37,6 +41,7 @@ export function BurgerConstructor() {
       navigate('/login')
     } else {
       setOpenModal(!openModal)
+      // @ts-ignore
       dispatch(getOrderDetails(idIngredientsList))
     }
   }
@@ -46,10 +51,10 @@ export function BurgerConstructor() {
 
   const [, drop] = useDrop(() => ({
     accept: 'ingredient',
-    drop: (item) => addElement(item.ingredient),
+    drop: (item: TItem) => addElement(item.ingredient),
   }))
 
-  const addElement = (element) => {
+  const addElement = (element: TIngredientType) => {
     element = { ...element, id: nanoid() }
     if (element.type === 'bun') {
       dispatch(setBun(element))
@@ -78,14 +83,14 @@ export function BurgerConstructor() {
             isLocked={true}
             text="Перетащите сюда булку"
             thumbnail={logo}
-            price="-"
+            price={0}
           />
         </div>
       )}
 
       <div className={style.saucesAndMain}>
         {main.length > 0 ? (
-          main.map((element, index) => {
+          main.map((element: TIngredientType, index: number) => {
             return (
               <BurgerConstructorItem
                 element={element}
@@ -100,7 +105,7 @@ export function BurgerConstructor() {
             <ConstructorElement
               text="Перетащите сюда соус или начинку"
               thumbnail={logo}
-              price="-"
+              price={0}
             />
           </div>
         )}
@@ -122,7 +127,7 @@ export function BurgerConstructor() {
             isLocked={true}
             text="Перетащите сюда булку"
             thumbnail={logo}
-            price="-"
+            price={0}
           />
         </div>
       )}
@@ -130,7 +135,7 @@ export function BurgerConstructor() {
         <ConfirmationOrder handleOrderClick={handleOrderClick} />
       ) : null}
       {openModal && (
-        <Modal onClose={closeModal}>
+        <Modal onClose={closeModal} header="">
           <OrderDetails />
         </Modal>
       )}
@@ -138,6 +143,4 @@ export function BurgerConstructor() {
   )
 }
 
-// BurgerConstructor.propTypes = {
-//   handleOrderClick: PropTypes.func.isRequired,
-// }
+

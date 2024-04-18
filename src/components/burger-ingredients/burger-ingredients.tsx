@@ -10,8 +10,8 @@ import style from './burger-ingredients.module.css'
 
 export function BurgerIngredients() {
   const dispatch = useDispatch()
-  const current = useSelector((state) => state.scrollIngredients.current)
-  const setCurrent = (value) => {
+  const current = useSelector((state: any) => state.scrollIngredients.current)
+  const setCurrent = (value: string) => {
     dispatch(setActiveTab(value))
     dispatch(scrollIngredients(value))
   }

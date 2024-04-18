@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEventHandler } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
@@ -12,7 +12,7 @@ import style from './pages.module.css'
 
 export function Registration() {
   const authorization = useSelector(
-    (state) => state.userAuthorization.authorization
+    (state: any) => state.userAuthorization.authorization
   )
 
   const dispatch = useDispatch()
@@ -22,13 +22,14 @@ export function Registration() {
     password: '',
   })
 
-  const checkRegistration = (evt) => {
+  const checkRegistration: FormEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault()
+    // @ts-ignore
     dispatch(userRegistration(value.name, value.email, value.password))
   }
-  const inputRef = React.useRef(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
+    setTimeout(() => inputRef.current?.focus(), 0)
   }
 
   if (authorization) {
