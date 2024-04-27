@@ -1,9 +1,9 @@
 import style from './order-details.module.css'
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../utils/hooks'
 
 export function OrderDetails() {
-  const number = useSelector((state: any) => state.orderDetails.id)
+  const number = useAppSelector((state) => state.orderDetails.id)
   return (
     <div className={style.orderDetails}>
       <div className="text_type_digits-large">{number}</div>

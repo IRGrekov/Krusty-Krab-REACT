@@ -1,22 +1,27 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
-import style from './pages.module.css'
+import { useEffect } from 'react'
+import styles from './pages.module.css'
+import { OrderFeed } from '../components/order-feed/order-feed'
+import { Orders } from '../components/orders/orders'
+import {
+  wsConnectionStart,
+  wsConnectionClosed,
+} from '../services/actions/websockets'
+import { useAppDispatch } from '../utils/hooks'
 
-export function Feed() {
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
-  )
+export const Feed = () => {
+  const dispatch = useAppDispatch()
 
-  if (!authorization) {
-    return <Navigate to={'/login'} />
-  }
+  useEffect(() => {
+    dispatch(wsConnectionStart())
+    return () => {
+      dispatch(wsConnectionClosed())
+    }
+  }, [])
 
   return (
-    <span
-      className={`${style.text} text text_type_main-medium text_color_inactive`}
-    >
-      Soon
-    </span>
+    <section className={styles.content}>
+      <OrderFeed />
+      <Orders />
+    </section>
   )
 }

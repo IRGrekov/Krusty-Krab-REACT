@@ -3,19 +3,18 @@ import { BurgerIngredientsSet } from '../burger-ingredients-set/burger-ingredien
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { setActiveTab } from '../../services/actions/burger-ingredients-scroll'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 
 export function BurgerIngredientsСhapters() {
-  const dispatch = useDispatch()
-  const scroll = useSelector((state: any) => state.scrollIngredients.scroll)
-  const ingredients = useSelector(
-    (state: any) => state.burgerIngredients.burgerIngredients
-  )
+  const dispatch = useAppDispatch()
+  const scroll = useAppSelector((state) => state.scrollIngredients.scroll)
 
+  
   const bunRef = useRef<HTMLParagraphElement>(null)
   const sauceRef = useRef<HTMLParagraphElement>(null)
   const mainRef = useRef<HTMLParagraphElement>(null)
   const scrollRef = useRef<HTMLParagraphElement>(null)
-
+  
   useEffect(() => {
     let ref = bunRef
     if (scroll === 'sauce') {
@@ -24,15 +23,15 @@ export function BurgerIngredientsСhapters() {
     if (scroll === 'main') {
       ref = mainRef
     }
-
+    
     ref.current?.scrollIntoView({ behavior: 'smooth' })
   }, [scroll])
-
+  
   useEffect(() => {
     const headings = [bunRef.current, sauceRef.current, mainRef.current]
-
+    
     const observer = new IntersectionObserver(
-      (headings) => {
+      (headings: IntersectionObserverEntry[]) => {
         headings.forEach((heading) => {
           if (heading.target === bunRef.current) {
             dispatch(setActiveTab('bun'))

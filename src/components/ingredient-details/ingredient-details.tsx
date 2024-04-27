@@ -1,12 +1,12 @@
 import style from './ingredient-details.module.css'
-import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { TIngredientType } from '../../constant/types'
+import { useAppSelector } from '../../utils/hooks'
 
 export function IngredientDetails() {
-  const ingredients = useSelector(
-    (state: any) => state.burgerIngredients.burgerIngredients
+  const ingredients = useAppSelector(
+    (state) => state.burgerIngredients.burgerIngredients
   )
 
   const { id } = useParams()

@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux'
 import { BurgerIngredientsEl } from '../burger-ingredients-item/burger-ingredients-item'
 import { TBurgerIngredientsSet, TIngredientType } from '../../constant/types'
 import { FC } from 'react'
+import { useAppSelector } from '../../utils/hooks'
 
 export const BurgerIngredientsSet: FC<TBurgerIngredientsSet> = ({ type }) => {
-  const ingredients = useSelector(
-    (state: any) => state.burgerIngredients.burgerIngredients
+  const ingredients = useAppSelector(
+    (state) => state.burgerIngredients.burgerIngredients
   )
   return (
     <>

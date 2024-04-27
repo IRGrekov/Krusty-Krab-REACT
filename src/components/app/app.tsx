@@ -16,6 +16,9 @@ import { IngredientInfo } from '../../pages/ingredient-info'
 import { ProtectedRoute } from '../protected-route/protected-route'
 import { Feed } from '../../pages/feed'
 import { useNavigate } from 'react-router-dom'
+import { OrderInfo } from '../../pages/order-info'
+import { ProfileOrderInfo } from '../../pages/profile-order-info'
+import { ProfileOrders } from '../../pages/profile-orders'
 import { api } from '../../api/api'
 import styles from './app.module.css'
 
@@ -33,7 +36,11 @@ export default function App() {
   const closeIngredientsModal = useCallback(() => {
     dispatch(deleteIngredientDetails())
     navigate('/')
-  }, [dispatch])
+}, [dispatch])
+
+const closeFeedModal = useCallback(() => {
+    navigate('/feed')
+}, [dispatch])
 
   return (
     <>
@@ -54,26 +61,44 @@ export default function App() {
           }
         />
         <Route
-          path="/feed"
-          element={
+          path="/profile/orders"
+          element={ 
             <ProtectedRoute>
-              <Feed />
+              <ProfileOrders />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/profile/orders/:id"
+          element={
+            <ProtectedRoute>
+              <ProfileOrderInfo />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<OrderInfo />} />
         <Route path="/ingredients/:id" element={<IngredientInfo />} />
       </Routes>
 
       {state && (
         <Routes>
-          <Route
-            path="/ingredients/:id"
-            element={
-              <Modal
-                onClose={closeIngredientsModal}
-                header="Детали ингредиента"
-              >
-                <IngredientDetails />
+        <Route
+          path="/ingredients/:id"
+          element={
+            <Modal
+              onClose={closeIngredientsModal}
+              header="Детали ингредиента"
+            >
+              <IngredientDetails />
+            </Modal>
+          }
+        ></Route>
+        <Route
+          path="/feed/:id"
+          element={
+            <Modal onClose={closeFeedModal} header="Детали заказа">
+                <OrderInfo />
               </Modal>
             }
           ></Route>

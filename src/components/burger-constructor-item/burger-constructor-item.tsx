@@ -10,6 +10,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Identifier } from 'dnd-core'
 import {
   TBurgerConstructorElement,
   TIngredientType
@@ -31,14 +32,20 @@ export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({
     dispatch(deleteIngredient(element))
   }
 
-  const [, drop] = useDrop({
+  const [{ handlerId }, drop] = useDrop<
+    {
+      ingredient: TBurgerConstructorElement
+      index: number
+    },
+    unknown,
+    { handlerId: Identifier | null }
+  >({
     accept: 'card',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       }
     },
-    // @ts-ignore
     hover(item: { index: number }, monitor) {
       if (!ref.current) {
         return
