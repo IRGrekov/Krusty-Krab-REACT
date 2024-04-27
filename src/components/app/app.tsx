@@ -36,11 +36,11 @@ export default function App() {
   const closeIngredientsModal = useCallback(() => {
     dispatch(deleteIngredientDetails())
     navigate('/')
-}, [dispatch])
+  }, [dispatch])
 
-const closeFeedModal = useCallback(() => {
+  const closeFeedModal = useCallback(() => {
     navigate('/feed')
-}, [dispatch])
+  }, [dispatch])
 
   return (
     <>
@@ -62,7 +62,7 @@ const closeFeedModal = useCallback(() => {
         />
         <Route
           path="/profile/orders"
-          element={ 
+          element={
             <ProtectedRoute>
               <ProfileOrders />
             </ProtectedRoute>
@@ -83,21 +83,21 @@ const closeFeedModal = useCallback(() => {
 
       {state && (
         <Routes>
-        <Route
-          path="/ingredients/:id"
-          element={
-            <Modal
-              onClose={closeIngredientsModal}
-              header="Детали ингредиента"
-            >
-              <IngredientDetails />
-            </Modal>
-          }
-        ></Route>
-        <Route
-          path="/feed/:id"
-          element={
-            <Modal onClose={closeFeedModal} header="Детали заказа">
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal
+                onClose={closeIngredientsModal}
+                header="Детали ингредиента"
+              >
+                <IngredientDetails />
+              </Modal>
+            }
+          ></Route>
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal onClose={closeFeedModal} header="Детали заказа">
                 <OrderInfo />
               </Modal>
             }

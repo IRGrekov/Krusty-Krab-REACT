@@ -27,5 +27,3 @@ export const ProtectedRoute: FC<RouteProps | any> = ({
   // Если все ок, то рендерим внутреннее содержимое
   return children
 }
-
-

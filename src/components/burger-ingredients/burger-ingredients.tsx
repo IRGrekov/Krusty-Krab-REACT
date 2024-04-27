@@ -8,7 +8,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import style from './burger-ingredients.module.css'
 
-
 export function BurgerIngredients() {
   const dispatch = useAppDispatch()
   const current = useAppSelector((state) => state.scrollIngredients.current)

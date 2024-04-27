@@ -68,5 +68,3 @@ export const BurgerIngredientsEl: FC<TBurgerIngredientsItem> = ({
     </div>
   )
 }
-
-

@@ -13,7 +13,7 @@ import {
 import { Identifier } from 'dnd-core'
 import {
   TBurgerConstructorElement,
-  TIngredientType
+  TIngredientType,
 } from '../../constant/types'
 
 export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({

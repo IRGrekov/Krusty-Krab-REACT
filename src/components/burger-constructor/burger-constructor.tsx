@@ -42,7 +42,7 @@ export function BurgerConstructor() {
       navigate('/login?retpath=/')
     } else {
       setOpenModal(!openModal)
-        // @ts-ignore
+      // @ts-ignore
       dispatch(getOrderDetails(idIngredientsList))
     }
   }
@@ -101,9 +101,11 @@ export function BurgerConstructor() {
                 element={element}
                 index={index}
                 id={element.id}
-                key={element.id} deleteElement={function (element: TIngredientType): void {
+                key={element.id}
+                deleteElement={function (element: TIngredientType): void {
                   throw new Error('Function not implemented.')
-                } }              />
+                }}
+              />
             )
           })
         ) : (
@@ -148,5 +150,3 @@ export function BurgerConstructor() {
     </div>
   )
 }
-
-
