@@ -1,5 +1,4 @@
 import React, { FormEventHandler } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   PasswordInput,
   Input,
@@ -7,14 +6,15 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Navigate } from 'react-router-dom'
 import { resetPassword } from '../services/actions/reset-password'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import style from './pages.module.css'
 
 export function ResetPassword() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const forgot = useSelector((state: any) => state.forgotPassword.success)
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const forgot = useAppSelector((state) => state.forgotPassword.success)
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
   const [value, setValue] = React.useState({

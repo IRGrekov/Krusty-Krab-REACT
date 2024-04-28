@@ -1,6 +1,5 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { nanoid } from 'nanoid'
 import {
@@ -24,7 +23,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 
 export function BurgerConstructor() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const buns = useAppSelector((state) => state.burgerConstructor.bunsList)

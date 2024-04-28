@@ -3,7 +3,11 @@ import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-component
 import { useAppSelector } from '../../utils/hooks'
 
 export function OrderDetails() {
-  const number = useAppSelector((state) => state.orderDetails.id)
+  const number = useAppSelector((state) => {
+    const { id } = state.orderDetails
+    return id
+  })
+
   return (
     <div className={style.orderDetails}>
       <div className="text_type_digits-large">{number}</div>

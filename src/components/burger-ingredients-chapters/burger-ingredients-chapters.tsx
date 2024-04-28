@@ -1,6 +1,5 @@
 import style from './burger-ingredients-chapters.module.css'
 import { BurgerIngredientsSet } from '../burger-ingredients-set/burger-ingredients-set'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { setActiveTab } from '../../services/actions/burger-ingredients-scroll'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'

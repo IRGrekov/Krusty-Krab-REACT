@@ -1,26 +1,26 @@
 import { useEffect } from 'react'
 import styles from './pages.module.css'
-import {
-  wsConnectionStartUser,
-  wsConnectionClosedUser,
-} from '../services/actions/websockets'
 import { Order } from '../components/order/order'
+import {
+  wsConnectionStart,
+  wsConnectionClosed,
+} from '../services/actions/websockets'
 import { useAppDispatch } from '../utils/hooks'
-import { getCookie } from '../utils/cookie'
+import { OrderInfo } from './order-info'
 
-export const ProfileOrderInfo = () => {
+export const FeedDetails = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(wsConnectionStartUser(`?token=${getCookie('access')}`))
+    dispatch(wsConnectionStart(''))
     return () => {
-      dispatch(wsConnectionClosedUser())
+      dispatch(wsConnectionClosed())
     }
   }, [])
 
   return (
     <div className={styles.info}>
-      <Order />
+      <OrderInfo />
     </div>
   )
 }

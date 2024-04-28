@@ -1,5 +1,4 @@
 import React, { FormEventHandler } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
   EmailInput,
@@ -8,14 +7,15 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Navigate } from 'react-router-dom'
 import { userRegistration } from '../services/actions/registration'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import style from './pages.module.css'
 
 export function Registration() {
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [value, setValue] = React.useState({
     name: '',
     email: '',

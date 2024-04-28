@@ -7,12 +7,13 @@ import {
 } from '../services/actions/websockets'
 import { OrderHistory } from '../components/order-history/order-history'
 import { useAppDispatch } from '../utils/hooks'
+import { getCookie } from '../utils/cookie'
 
 export function ProfileOrders() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(wsConnectionStartUser())
+    dispatch(wsConnectionStartUser(`?token=${getCookie('access')}`))
     return () => {
       dispatch(wsConnectionClosedUser())
     }

@@ -4,6 +4,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { FC, useMemo } from 'react'
 import { TOrderRegistration } from '../../constant/types'
+import style from '../burger-constructor/burger-constructor.module.css'
 import { useAppSelector } from '../../utils/hooks'
 
 export const ConfirmationOrder: FC<TOrderRegistration> = ({
