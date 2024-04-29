@@ -8,15 +8,6 @@ import {
 import { useAppDispatch } from '../utils/hooks'
 
 export const OrderInfo = () => {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(wsConnectionStart())
-    return () => {
-      dispatch(wsConnectionClosed())
-    }
-  }, [])
-
   return (
     <div className={styles.info}>
       <Order />
