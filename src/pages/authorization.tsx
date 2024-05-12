@@ -5,16 +5,16 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { userAuthorization } from '../services/actions/authorization'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import style from './pages.module.css'
 
 export function Authorization() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
   const [value, setValue] = React.useState({

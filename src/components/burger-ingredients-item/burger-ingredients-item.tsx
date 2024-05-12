@@ -3,27 +3,27 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import style from './burger-ingredients-item.module.css'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { addIngredientDetails } from '../../services/actions/ingredient-details'
 import { useDrag } from 'react-dnd'
 import { TBurgerIngredientsItem, TIngredientType } from '../../constant/types'
 import { FC } from 'react'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 
 export const BurgerIngredientsEl: FC<TBurgerIngredientsItem> = ({
   ingredient,
 }) => {
   const location = useLocation()
 
-  const buns = useSelector((state: any) => state.burgerConstructor.bunsList)
-  const main = useSelector((state: any) => state.burgerConstructor.mainList)
+  const buns = useAppSelector((state) => state.burgerConstructor.bunsList)
+  const main = useAppSelector((state) => state.burgerConstructor.mainList)
 
   const counter =
     buns.filter((item: TIngredientType) => item._id === ingredient._id).length *
       2 ||
     main.filter((item: TIngredientType) => item._id === ingredient._id).length
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleIngredientClick = (ingredient: TIngredientType) => {
     dispatch(addIngredientDetails(ingredient))
@@ -68,5 +68,3 @@ export const BurgerIngredientsEl: FC<TBurgerIngredientsItem> = ({
     </div>
   )
 }
-
-

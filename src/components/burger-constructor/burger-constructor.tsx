@@ -1,10 +1,10 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { nanoid } from 'nanoid'
 import {
   addIngredient,
+  deleteIngredient,
   setBun,
 } from '../../services/actions/burger-constructor'
 import { useNavigate } from 'react-router-dom'
@@ -20,25 +20,25 @@ import {
   TIngredientType,
   TItem,
 } from '../../constant/types'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 
 export function BurgerConstructor() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const buns = useSelector((state: any) => state.burgerConstructor.bunsList)
-  const main = useSelector((state: any) => state.burgerConstructor.mainList)
-  const ingredients = useSelector(
-    (state: any) => state.burgerIngredients.burgerIngredients
-  )
-  const idIngredientsList = ingredients.map((el: TIngredientType) => el._id)
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const buns = useAppSelector((state) => state.burgerConstructor.bunsList)
+  const main = useAppSelector((state) => state.burgerConstructor.mainList)
+  const idMainList = main.map((item) => item._id)
+  const idBunsList = buns.map((item) => item._id)
+  const idIngredientsList = idMainList.concat(idBunsList).concat(idBunsList)
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
   const [openModal, setOpenModal] = React.useState(false)
   const handleOrderClick = () => {
     if (!authorization) {
-      navigate('/login')
+      navigate('/login?retpath=/')
     } else {
       setOpenModal(!openModal)
       // @ts-ignore
@@ -62,6 +62,10 @@ export function BurgerConstructor() {
     if (element.type === 'sauce' || element.type === 'main') {
       dispatch(addIngredient(element))
     }
+  }
+
+  const deleteElement = (element: TIngredientType) => {
+    dispatch(deleteIngredient(element))
   }
 
   return (
@@ -97,6 +101,9 @@ export function BurgerConstructor() {
                 index={index}
                 id={element.id}
                 key={element.id}
+                deleteElement={function (element: TIngredientType): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             )
           })
@@ -142,5 +149,3 @@ export function BurgerConstructor() {
     </div>
   )
 }
-
-

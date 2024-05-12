@@ -1,17 +1,16 @@
 import React from 'react'
 import { NavLink, Navigate } from 'react-router-dom'
 import { userLogout } from '../../services/actions/logout'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import style from './profile-form.module.css'
 
 export function ProfileForm() {
-  const dispatch = useDispatch()
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const dispatch = useAppDispatch()
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
   const handleLogout = React.useCallback(() => {
-    //@ts-ignore
     dispatch(userLogout())
   }, [dispatch])
 

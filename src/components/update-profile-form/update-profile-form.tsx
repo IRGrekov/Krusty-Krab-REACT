@@ -5,15 +5,15 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../../services/actions/user'
 import { updateUser } from '../../services/actions/user'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import style from './update-profile-form.module.css'
 
 export function UpdateProfileForm() {
-  const dispatch = useDispatch()
-  const userName = useSelector((state: any) => state.profile.user.name)
-  const userEmail = useSelector((state: any) => state.profile.user.email)
+  const dispatch = useAppDispatch()
+  const userName = useAppSelector((state) => state.profile.user.name)
+  const userEmail = useAppSelector((state) => state.profile.user.email)
 
   React.useEffect(() => {
     // @ts-ignore

@@ -1,5 +1,4 @@
 import React, { FormEventHandler } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   EmailInput,
   Button,
@@ -7,13 +6,14 @@ import {
 import { Link, Navigate } from 'react-router-dom'
 import { forgotPassword } from '../services/actions/forgot-password'
 import style from './pages.module.css'
+import { useAppDispatch, useAppSelector } from '../utils/hooks'
 
 export function ForgotPassword() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const success = useSelector((state: any) => state.forgotPassword.success)
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const success = useAppSelector((state) => state.forgotPassword.success)
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
 
   const [value, setValue] = React.useState({

@@ -1,13 +1,13 @@
 import { Navigate, RouteProps, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { FC } from 'react'
+import { useAppSelector } from '../../utils/hooks'
 
 export const ProtectedRoute: FC<RouteProps | any> = ({
   children,
   anonymous = false,
 }) => {
-  const authorization = useSelector(
-    (state: any) => state.userAuthorization.authorization
+  const authorization = useAppSelector(
+    (state) => state.userAuthorization.authorization
   )
   const location = useLocation()
 
@@ -27,5 +27,3 @@ export const ProtectedRoute: FC<RouteProps | any> = ({
   // Если все ок, то рендерим внутреннее содержимое
   return children
 }
-
-

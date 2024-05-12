@@ -1,5 +1,4 @@
 import { FC, useRef } from 'react'
-import { useDispatch } from 'react-redux'
 import {
   deleteIngredient,
   moveIngredient,
@@ -10,10 +9,12 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Identifier } from 'dnd-core'
 import {
   TBurgerConstructorElement,
-  TIngredientType
+  TIngredientType,
 } from '../../constant/types'
+import { useAppDispatch } from '../../utils/hooks'
 
 export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({
   element,
@@ -21,8 +22,7 @@ export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({
   index,
 }) => {
   const ref = useRef(null)
-  const dispatch = useDispatch()
-
+  const dispatch = useAppDispatch()
   const moveCard = (start: number, end: number) => {
     dispatch(moveIngredient(start, end))
   }
@@ -31,14 +31,20 @@ export const BurgerConstructorItem: FC<TBurgerConstructorElement> = ({
     dispatch(deleteIngredient(element))
   }
 
-  const [, drop] = useDrop({
+  const [{ handlerId }, drop] = useDrop<
+    {
+      ingredient: TBurgerConstructorElement
+      index: number
+    },
+    unknown,
+    { handlerId: Identifier | null }
+  >({
     accept: 'card',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       }
     },
-    // @ts-ignore
     hover(item: { index: number }, monitor) {
       if (!ref.current) {
         return

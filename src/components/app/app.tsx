@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Header } from '../header/header'
 import { Modal } from '../modal/modal'
 import { IngredientDetails } from '../ingredient-details/ingredient-details'
@@ -16,11 +15,17 @@ import { IngredientInfo } from '../../pages/ingredient-info'
 import { ProtectedRoute } from '../protected-route/protected-route'
 import { Feed } from '../../pages/feed'
 import { useNavigate } from 'react-router-dom'
+import { OrderInfo } from '../../pages/order-info'
+import { useAppDispatch } from '../../utils/hooks'
+import { ProfileOrderInfo } from '../../pages/profile-order-info'
+import { ProfileOrders } from '../../pages/profile-orders'
+import { HistoryDetails } from '../../pages/history-details'
+import { FeedDetails } from '../../pages/feed-details'
 import { api } from '../../api/api'
 import styles from './app.module.css'
 
 export default function App() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const state = location?.state?.backgroundLocation
@@ -33,6 +38,14 @@ export default function App() {
   const closeIngredientsModal = useCallback(() => {
     dispatch(deleteIngredientDetails())
     navigate('/')
+  }, [dispatch])
+
+  const closeFeedModal = useCallback(() => {
+    navigate('/feed')
+  }, [dispatch])
+
+  const closeUserFeedModal = useCallback(() => {
+    navigate('/profile/orders')
   }, [dispatch])
 
   return (
@@ -54,13 +67,23 @@ export default function App() {
           }
         />
         <Route
-          path="/feed"
+          path="/profile/orders"
           element={
             <ProtectedRoute>
-              <Feed />
+              <ProfileOrders />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/profile/orders/:id"
+          element={
+            <ProtectedRoute>
+              <HistoryDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<FeedDetails />} />
         <Route path="/ingredients/:id" element={<IngredientInfo />} />
       </Routes>
 
@@ -74,6 +97,22 @@ export default function App() {
                 header="Детали ингредиента"
               >
                 <IngredientDetails />
+              </Modal>
+            }
+          ></Route>
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal onClose={closeFeedModal} header="Детали заказа">
+                <OrderInfo />
+              </Modal>
+            }
+          ></Route>
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal onClose={closeUserFeedModal} header="Детали заказа">
+                <ProfileOrderInfo />
               </Modal>
             }
           ></Route>
