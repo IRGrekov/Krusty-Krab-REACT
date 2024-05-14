@@ -19,10 +19,9 @@ type TLoginAndRegisterResponse = TServerResponse<{
   }
 }>
 
-const userAuthorizationSuccess = (payload: TLoginAndRegisterResponse) => ({
-  type: USER_AUTHORIZATION_SUCCESS,
-  payload,
-})
+export const userAuthorizationSuccess = (
+  payload: TLoginAndRegisterResponse
+) => ({ type: USER_AUTHORIZATION_SUCCESS, payload })
 
 export function userAuthorization(email: string, password: string) {
   return (dispatch: AppDispatch) => {

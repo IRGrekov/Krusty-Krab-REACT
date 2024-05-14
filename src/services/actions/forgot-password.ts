@@ -7,7 +7,7 @@ export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS'
 export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE'
 
-const forgotPasswordSuccess = (payload: boolean) => ({
+export const forgotPasswordSuccess = (payload: boolean) => ({
   type: FORGOT_PASSWORD_SUCCESS,
   payload,
 })
