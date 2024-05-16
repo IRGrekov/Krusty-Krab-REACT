@@ -17,12 +17,6 @@ export const userRegistrationReducer = (
   action: TUnionAction
 ): TInitialState => {
   switch (action.type) {
-    // case USER_REGISTRATION_REQUEST: {
-    //   return {
-    //     ...state,
-    //     registrationRequest: true
-    //   }
-    // }
     case USER_REGISTRATION_SUCCESS: {
       return {
         ...state,
@@ -30,13 +24,6 @@ export const userRegistrationReducer = (
         user: action.payload.user,
       }
     }
-    // case USER_REGISTRATION_ERROR: {
-    //   return {
-    //     ...state,
-    //     registrationRequest: false,
-    //     registrationError: true
-    //   }
-    // }
     default: {
       return state
     }

@@ -3,7 +3,6 @@ import { clearConstructor } from './burger-constructor'
 import { Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { AppDispatch, RootState } from '../../main'
-
 export const GET_ORDER_DETAILS_REQUEST = 'GET_ORDER_DETAILS_REQUEST'
 export const GET_ORDER_DETAILS_SUCCESS = 'GET_ORDER_DETAILS_SUCCESS'
 export const GET_ORDER_DETAILS_FAILURE = 'GET_ORDER_DETAILS_FAILURE'
