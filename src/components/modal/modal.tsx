@@ -29,7 +29,11 @@ export const Modal: FC<TModal> = ({ header, children, onClose }) => {
         <div className={style.topPart}>
           <div className="text text_type_main-large">{header}</div>
           <div className={style.closeButtonContainer}>
-            <CloseIcon type="primary" onClick={onClose} />
+            <CloseIcon
+              data-testid="modal-close-button"
+              type="primary"
+              onClick={onClose}
+            />
           </div>
         </div>
         {children}

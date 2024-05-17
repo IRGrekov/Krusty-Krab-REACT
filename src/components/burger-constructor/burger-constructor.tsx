@@ -69,7 +69,7 @@ export function BurgerConstructor() {
   }
 
   return (
-    <div className={style.listIng} ref={drop}>
+    <div data-testid="burger-constructor" className={style.listIng} ref={drop}>
       {buns.length > 0 ? (
         <div className="pl-7">
           <ConstructorElement
@@ -101,9 +101,7 @@ export function BurgerConstructor() {
                 index={index}
                 id={element.id}
                 key={element.id}
-                deleteElement={function (element: TIngredientType): void {
-                  throw new Error('Function not implemented.')
-                }}
+                deleteElement={deleteElement}
               />
             )
           })
@@ -142,7 +140,7 @@ export function BurgerConstructor() {
         <ConfirmationOrder handleOrderClick={handleOrderClick} />
       ) : null}
       {openModal && (
-        <Modal onClose={closeModal} header="">
+        <Modal data-testid="modal-close-button" onClose={closeModal} header="">
           <OrderDetails />
         </Modal>
       )}

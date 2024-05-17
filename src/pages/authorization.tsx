@@ -37,13 +37,18 @@ export function Authorization() {
   }, [authorization])
 
   return (
-    <form className={style.default} onSubmit={checkAuthorization}>
+    <form
+      className={style.default}
+      onSubmit={checkAuthorization}
+      data-testid="authorization-form"
+    >
       <h2 className="text text_type_main-medium">Вход</h2>
       <EmailInput
         onChange={(evt) => setValue({ ...value, email: evt.target.value })}
         value={value.email}
         name={'email'}
         extraClass="mt-6"
+        data-testid="email-input"
       />
       <PasswordInput
         onChange={(evt) => setValue({ ...value, password: evt.target.value })}
@@ -51,8 +56,15 @@ export function Authorization() {
         name={'password'}
         icon="ShowIcon"
         extraClass="mt-6"
+        data-testid="password-input"
       />
-      <Button type="primary" size="medium" htmlType="submit" extraClass="mt-6">
+      <Button
+        type="primary"
+        size="medium"
+        htmlType="submit"
+        extraClass="mt-6"
+        data-testid="login-button"
+      >
         Войти
       </Button>
       <div className={`${style.choice} mt-20`}>
@@ -62,6 +74,7 @@ export function Authorization() {
         <Link
           to="/register"
           className={`${style.link} text text_type_main-default`}
+          data-testid="register-link"
         >
           Зарегистрироваться
         </Link>
@@ -73,6 +86,7 @@ export function Authorization() {
         <Link
           to="/forgot-password"
           className={`${style.link} text text_type_main-default`}
+          data-testid="forgot-password-link"
         >
           Восстановить пароль
         </Link>
