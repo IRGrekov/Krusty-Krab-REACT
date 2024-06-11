@@ -8,7 +8,7 @@ import { rootReducer } from './services/reducers'
 import { socketMiddleware } from './services/middleware/socket-middleware'
 import { wsActions, wsActionsUser } from './services/actions/websockets'
 import { getCookie } from './utils/cookie'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

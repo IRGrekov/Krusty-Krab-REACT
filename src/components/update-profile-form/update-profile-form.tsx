@@ -67,6 +67,7 @@ export function UpdateProfileForm() {
         errorText={'Ошибка'}
         size={'default'}
         icon="EditIcon"
+        data-testid="name-input"
       />
       <Input
         type={'email'}
@@ -78,6 +79,7 @@ export function UpdateProfileForm() {
         extraClass="mt-6"
         ref={inputRef}
         onIconClick={() => onIconClick()}
+        data-testid="email-input"
       />
       <Input
         type={'password'}
@@ -89,6 +91,7 @@ export function UpdateProfileForm() {
         name={'password'}
         icon="EditIcon"
         extraClass="mt-6"
+        data-testid="password-input"
       />
       <div className={`${style.choice} mt-6`}>
         <Button
@@ -97,6 +100,7 @@ export function UpdateProfileForm() {
           htmlType="reset"
           extraClass="pr-7"
           onClick={cancelEditing}
+          data-testid="cancel-button"
         >
           Отмена
         </Button>

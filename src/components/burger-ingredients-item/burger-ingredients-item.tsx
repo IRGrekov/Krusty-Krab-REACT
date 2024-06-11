@@ -38,12 +38,13 @@ export const BurgerIngredientsEl: FC<TBurgerIngredientsItem> = ({
     },
   }))
 
-  // const handleCounterClick = () => {
+    // const handleCounterClick = () => {
   //     setCount(count + 1);
   // };
 
   return (
     <div
+      data-testid="burger-ingredient-item"
       className={style.mainDiv}
       onClick={() => handleIngredientClick(ingredient)}
       ref={drag}
